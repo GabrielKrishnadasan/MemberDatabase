@@ -3,7 +3,7 @@ package src;
 public class runFile {
     public static void main(String[] args) {
         System.out.println("Hello, world!");
-        applicationTrackerUI ui = new applicationTrackerUI();
+        jobApplicationTrackerGUI ui = new jobApplicationTrackerGUI();
         ui.setVisible(true);
     }
 }
