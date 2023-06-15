@@ -1,2 +1,2 @@
-# MemberDatabase
-Application to store names and information about members at the University Club
+# Job application tracker application
+I wanted to create something that I could use when I started to apply for internships and or jobs.
