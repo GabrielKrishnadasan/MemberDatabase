@@ -21,9 +21,8 @@ public class readFile {
             FileReader fileReader = new FileReader(filePath);
             BufferedReader bufferedReader = new BufferedReader(fileReader);
 
-            String line;
+            String line = bufferedReader.readLine();
             while ((line = bufferedReader.readLine()) != null) {
-
                 companyName = bufferedReader.readLine();
                 jobName = bufferedReader.readLine();
                 salary = Double.parseDouble(bufferedReader.readLine());
