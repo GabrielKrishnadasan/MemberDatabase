@@ -7,13 +7,13 @@ import java.io.IOException;
 public class Tester {
     public static void main(String[] args)
     {
-        JobApplication test = new JobApplication("Google", "Software Developer", 20000, "6/16/23", "LinkedIn", "Placeholder");
+        JobApplication test = new JobApplication("Google", "Software Developer", 20000, "6/15/23", "6/16/23", "LinkedIn", "Placeholder");
         
 
         JobApplication[] jobArray = new JobApplication[3];
         jobArray[0] = test;
         jobArray[1] = new JobApplication();
-        jobArray[2] = new JobApplication("Netflix", "Cybersecurity", 30000, "6/16/23", "Handshake", "Placeholder");
+        jobArray[2] = new JobApplication("Netflix", "Cybersecurity", 30000, "6/15/23", "6/16/23", "Handshake", "Placeholder");
 
 
         try {
