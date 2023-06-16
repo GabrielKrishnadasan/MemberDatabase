@@ -88,6 +88,7 @@ public class JobApplicationGUI extends JFrame {
         displayArea.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
         getContentPane().add(new JScrollPane(displayArea));
 
+        //Initializes variables for readin of the file
         String companyName;
         String jobName;
         double salary;
@@ -101,6 +102,7 @@ public class JobApplicationGUI extends JFrame {
             FileReader fileReader = new FileReader(filePath);
             BufferedReader bufferedReader = new BufferedReader(fileReader);
 
+            //Reads in each line from the job app txt file, creating a job object for each job application, and adding them to the job array
             String line = bufferedReader.readLine();
             while ((line = bufferedReader.readLine()) != null) {
                 companyName = bufferedReader.readLine();
@@ -117,12 +119,14 @@ public class JobApplicationGUI extends JFrame {
             e.printStackTrace();
         }
 
+        //Displays the job array if there was anything in the job app txt file
         displayJobArray();
         setVisible(true);
     }
 
     private void displayJobArray() {
         String details = "";
+        //Loops through the job array and adds each job details to the details string, then displaying them in the displayArea
         for (JobApplication item : jobArray) {
            details += "Company Name: " + item.getCompanyName() + "\n"
                     + "Job Name: " + item.getJobName() + "\n"
@@ -144,12 +148,14 @@ public class JobApplicationGUI extends JFrame {
         String website = websiteField.getText();
         String applicationLink = applicationLinkField.getText();
 
+        //As long as each box has something in it when the user presses save, it will save the job
+        //Can add better checkers here GK
+        //Need to make it so when saving a valid job, the info is appended to the job file GK
         if (!companyName.isEmpty() && !jobName.isEmpty() && !salary.isEmpty()
                 && !applicationDate.isEmpty() && !startDate.isEmpty()
                 && !website.isEmpty() && !applicationLink.isEmpty()) {
             jobArray.add(new JobApplication(companyName, jobName, Double.parseDouble(salary), applicationDate, startDate, website, applicationLink));
 
-            
         } else {
             JOptionPane.showMessageDialog(this, "Please fill in all the fields.", "Error", JOptionPane.ERROR_MESSAGE);
         }
