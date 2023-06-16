@@ -23,7 +23,7 @@ public class Tester {
 
             for (int i = 0; i < jobArray.length; i++) {
                 bufferedWriter.write("\nJob Application " + (i + 1) + "\n");
-                bufferedWriter.write(jobArray[i].getDetails());
+                bufferedWriter.write(jobArray[i].writeToFile());
                 bufferedWriter.write("\n");
             }
 

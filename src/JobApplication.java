@@ -105,4 +105,14 @@ public class JobApplication {
                 "Job Website Used: " + jobWebsiteUsed + "\n" + 
                 "Link to Application " + linkToApplication;
     }
+
+    public String writeToFile() {
+        return  companyName + "\n" + 
+                jobName + "\n" + 
+                salary + "\n" +
+                applicationDate + "\n" +
+                startDate + " \n" +
+                jobWebsiteUsed + "\n" + 
+                linkToApplication;
+    }
 }
