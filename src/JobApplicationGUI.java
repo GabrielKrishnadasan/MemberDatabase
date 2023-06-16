@@ -12,6 +12,10 @@ import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
 
+//Want to add a search button GK
+//Better looking GUI GK
+//Ability to delete files from display area GK
+
 public class JobApplicationGUI extends JFrame {
     private ArrayList<JobApplication> jobArray = new ArrayList<JobApplication>();
 
