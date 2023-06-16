@@ -8,6 +8,15 @@ public class JobApplication {
     private String jobWebsiteUsed;
     private String linkToApplication;
 
+    public JobApplication() {
+        this.companyName = "None";
+        this.jobName = "None";
+        this.salary = 0;
+        this.startDate = "None";
+        this.jobWebsiteUsed = "None";
+        this.linkToApplication = "None";
+    }
+
     public JobApplication(String companyName, String jobName, double salary, String startDate, String jobWebsiteUsed, String linkToApplication) {
         this.companyName = companyName;
         this.jobName = jobName;
@@ -73,5 +82,14 @@ public class JobApplication {
         System.out.println("Start Date: " + startDate);
         System.out.println("Job Website Used: " + jobWebsiteUsed);
         System.out.println("Link to Application: " + linkToApplication);
+    }
+
+    public String getDetails() {
+        return "Company Name: " + companyName + "\n" + 
+                "Job Name: " + jobName + "\n" + 
+                "Salary: $" + salary + "\n" +
+                "Start Date: " + startDate + " \n" +
+                "Job Website Used: " + jobWebsiteUsed + "\n" + 
+                "Link to Application " + linkToApplication;
     }
 }

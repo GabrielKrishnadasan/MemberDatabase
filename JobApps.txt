@@ -1,0 +1,24 @@
+
+Job Application 1
+Company Name: Google
+Job Name: Software Developer
+Salary: $20000.0
+Start Date: 6/16/23 
+Job Website Used: LinkedIn
+Link to Application Placeholder
+
+Job Application 2
+Company Name: None
+Job Name: None
+Salary: $0.0
+Start Date: None 
+Job Website Used: None
+Link to Application None
+
+Job Application 3
+Company Name: Netflix
+Job Name: Cybersecurity
+Salary: $30000.0
+Start Date: 6/16/23 
+Job Website Used: Handshake
+Link to Application Placeholder
