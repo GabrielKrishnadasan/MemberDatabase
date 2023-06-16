@@ -1,14 +1,19 @@
 package src;
 
 import javax.swing.*;
+
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+
 import java.util.ArrayList;
+
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.io.IOException;
 
 public class JobApplicationGUI extends JFrame {
     private ArrayList<JobApplication> jobArray = new ArrayList<JobApplication>();
-
 
     private JTextField companyNameField;
     private JTextField jobNameField;
@@ -83,6 +88,36 @@ public class JobApplicationGUI extends JFrame {
         displayArea.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
         getContentPane().add(new JScrollPane(displayArea));
 
+        String companyName;
+        String jobName;
+        double salary;
+        String applicationDate;
+        String startDate;
+        String website;
+        String link;
+
+        try {
+            String filePath = "JobApps.txt";
+            FileReader fileReader = new FileReader(filePath);
+            BufferedReader bufferedReader = new BufferedReader(fileReader);
+
+            String line = bufferedReader.readLine();
+            while ((line = bufferedReader.readLine()) != null) {
+                companyName = bufferedReader.readLine();
+                jobName = bufferedReader.readLine();
+                salary = Double.parseDouble(bufferedReader.readLine());
+                applicationDate = bufferedReader.readLine();
+                startDate = bufferedReader.readLine();
+                website = bufferedReader.readLine();
+                link = bufferedReader.readLine();
+                jobArray.add(new JobApplication(companyName, jobName, salary, applicationDate, startDate, website, link));
+            }
+            bufferedReader.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        displayJobArray();
         setVisible(true);
     }
 
@@ -113,6 +148,8 @@ public class JobApplicationGUI extends JFrame {
                 && !applicationDate.isEmpty() && !startDate.isEmpty()
                 && !website.isEmpty() && !applicationLink.isEmpty()) {
             jobArray.add(new JobApplication(companyName, jobName, Double.parseDouble(salary), applicationDate, startDate, website, applicationLink));
+
+            
         } else {
             JOptionPane.showMessageDialog(this, "Please fill in all the fields.", "Error", JOptionPane.ERROR_MESSAGE);
         }
