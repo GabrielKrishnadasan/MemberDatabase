@@ -1,6 +1,5 @@
 package src;
 
-import javax.sound.sampled.Line;
 import javax.swing.*;
 
 import java.awt.*;
