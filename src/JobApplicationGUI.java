@@ -1,5 +1,6 @@
 package src;
 
+import javax.sound.sampled.Line;
 import javax.swing.*;
 
 import java.awt.*;
@@ -11,6 +12,8 @@ import java.util.ArrayList;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
+import java.io.FileWriter;
+import java.io.BufferedWriter;
 
 //Want to add a search button GK
 //Better looking GUI GK
@@ -107,7 +110,7 @@ public class JobApplicationGUI extends JFrame {
             BufferedReader bufferedReader = new BufferedReader(fileReader);
 
             //Reads in each line from the job app txt file, creating a job object for each job application, and adding them to the job array
-            String line = bufferedReader.readLine();
+            String line;
             while ((line = bufferedReader.readLine()) != null) {
                 companyName = bufferedReader.readLine();
                 jobName = bufferedReader.readLine();
@@ -159,6 +162,26 @@ public class JobApplicationGUI extends JFrame {
                 && !applicationDate.isEmpty() && !startDate.isEmpty()
                 && !website.isEmpty() && !applicationLink.isEmpty()) {
             jobArray.add(new JobApplication(companyName, jobName, Double.parseDouble(salary), applicationDate, startDate, website, applicationLink));
+
+            try {
+                String filePath = "JobApps.txt";
+                FileWriter fileWriter = new FileWriter(filePath);
+                BufferedWriter bufferedWriter = new BufferedWriter(fileWriter);
+    
+                if(jobArray.size() == 1)
+                {
+                    bufferedWriter.write("\n");
+                }
+                for (int i = 0; i < jobArray.size(); i++) {
+                    bufferedWriter.write("Job Application " + (i + 1) + "\n");
+                    bufferedWriter.write(jobArray.get(i).writeToFile());
+                    bufferedWriter.write("\n");
+                }
+    
+                bufferedWriter.close();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
 
         } else {
             JOptionPane.showMessageDialog(this, "Please fill in all the fields.", "Error", JOptionPane.ERROR_MESSAGE);
