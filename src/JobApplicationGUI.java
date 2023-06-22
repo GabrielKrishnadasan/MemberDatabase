@@ -21,6 +21,16 @@ import java.io.BufferedWriter;
 public class JobApplicationGUI extends JFrame {
     private ArrayList<JobApplication> jobArray = new ArrayList<JobApplication>();
 
+    private JPanel inputPanel;
+
+    private JButton introAddButton;
+    private JButton introEditDeleteButton;
+    private JButton introSearchButton;
+    private JButton saveButton;
+    private JButton editButton;
+    private JButton deleteButton;
+    private JButton searchButton;
+
     private JTextField companyNameField;
     private JTextField jobNameField;
     private JTextField salaryField;
@@ -30,63 +40,24 @@ public class JobApplicationGUI extends JFrame {
     private JTextField applicationLinkField;
     private JTextArea displayArea;
 
+    private JLabel companyNameLabel;
+    private JLabel jobNameLabel;
+    private JLabel salaryLabel;
+    private JLabel applicationDateLabel;
+    private JLabel startDateLabel;
+    private JLabel websiteLabel;
+    private JLabel applicationLinkLabel;
+    private JLabel displayAreaLabel;
+
     public JobApplicationGUI() {
         setTitle("Job Application");
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setSize(600, 400);
         setLayout(new GridLayout(1, 2));
 
-        JPanel inputPanel = new JPanel();
-        inputPanel.setLayout(new GridLayout(8, 2));
-        inputPanel.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
+        inputPanel = new JPanel();
 
-        // Company Name
-        inputPanel.add(new JLabel("Company Name:"));
-        companyNameField = new JTextField();
-        inputPanel.add(companyNameField);
-
-        // Job Name
-        inputPanel.add(new JLabel("Job Name:"));
-        jobNameField = new JTextField();
-        inputPanel.add(jobNameField);
-
-        // Salary
-        inputPanel.add(new JLabel("Salary:"));
-        salaryField = new JTextField();
-        inputPanel.add(salaryField);
-
-        // Application Date
-        inputPanel.add(new JLabel("Application Date:"));
-        applicationDateField = new JTextField();
-        inputPanel.add(applicationDateField);
-
-        // Start Date
-        inputPanel.add(new JLabel("Start Date:"));
-        startDateField = new JTextField();
-        inputPanel.add(startDateField);
-
-        // Website Used
-        inputPanel.add(new JLabel("Website Used:"));
-        websiteField = new JTextField();
-        inputPanel.add(websiteField);
-
-        // Link to Application
-        inputPanel.add(new JLabel("Link to Application:"));
-        applicationLinkField = new JTextField();
-        inputPanel.add(applicationLinkField);
-
-        // Save Button
-        JButton saveButton = new JButton("Save");
-        saveButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                saveJobData();
-                displayJobArray();
-            }
-        });
-        inputPanel.add(saveButton);
-
-        getContentPane().add(inputPanel);
+        setupIntroScreen();
 
         // Display Area
         displayArea = new JTextArea();
@@ -128,6 +99,110 @@ public class JobApplicationGUI extends JFrame {
         //Displays the job array if there was anything in the job app txt file
         displayJobArray();
         setVisible(true);
+    }
+
+    private void setupIntroScreen() {
+        inputPanel.setLayout(new GridLayout(3, 2));
+        inputPanel.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
+
+        introAddButton = new JButton("Add");
+        introAddButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                //Add the actions for this button GK
+            }
+        });
+        inputPanel.add(introAddButton);
+
+        introEditDeleteButton = new JButton("Edit/Delete");
+        introEditDeleteButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                //Add the actions for this button GK
+            }
+        });
+        inputPanel.add(introEditDeleteButton);
+
+        introSearchButton = new JButton("Search");
+        introSearchButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                //Add the actions for this button GK
+            }
+        });
+        inputPanel.add(introSearchButton);
+
+        getContentPane().add(inputPanel);
+
+    }
+
+    private void setupAddScreen() {
+        inputPanel.setLayout(new GridLayout(8, 2));
+        inputPanel.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
+
+        // Company Name
+        companyNameLabel = new JLabel("Company Name:");
+        inputPanel.add(companyNameLabel);
+        companyNameField = new JTextField();
+        inputPanel.add(companyNameField);
+
+        // Job Name
+        jobNameLabel = new JLabel("Job Name:");
+        inputPanel.add(jobNameLabel);
+        jobNameField = new JTextField();
+        inputPanel.add(jobNameField);
+
+        // Salary
+        salaryLabel = new JLabel("Salary:");
+        inputPanel.add(salaryLabel);
+        salaryField = new JTextField();
+        inputPanel.add(salaryField);
+
+        // Application Date
+        applicationDateLabel = new JLabel("Application Date:");
+        inputPanel.add(applicationDateLabel);
+        applicationDateField = new JTextField();
+        inputPanel.add(applicationDateField);
+
+        // Start Date
+        startDateLabel = new JLabel("Start Date:");
+        inputPanel.add(startDateLabel);
+        startDateField = new JTextField();
+        inputPanel.add(startDateField);
+
+        // Website Used
+        websiteLabel = new JLabel("Website Used:");
+        inputPanel.add(websiteLabel);
+        websiteField = new JTextField();
+        inputPanel.add(websiteField);
+
+        // Link to Application
+        applicationDateLabel = new JLabel("Application Date:");
+        inputPanel.add(applicationDateLabel);
+        applicationLinkField = new JTextField();
+        inputPanel.add(applicationLinkField);
+
+        // Save Button
+        JButton saveButton = new JButton("Save");
+        saveButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                saveJobData();
+                displayJobArray();
+            }
+        });
+        inputPanel.add(saveButton);
+
+        getContentPane().add(inputPanel);
+
+    }
+
+    private void setupEditDeleteScreen() {
+        
+    }
+
+    private void setupSearchScreen() {
+
     }
 
     private void displayJobArray() {
