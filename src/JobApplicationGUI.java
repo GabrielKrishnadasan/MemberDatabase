@@ -7,7 +7,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 import java.util.ArrayList;
-
+import java.util.concurrent.CopyOnWriteArrayList;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
@@ -38,6 +38,7 @@ public class JobApplicationGUI extends JFrame {
     private JTextField startDateField;
     private JTextField websiteField;
     private JTextField applicationLinkField;
+
     private JTextArea displayArea;
 
     private JLabel companyNameLabel;
@@ -52,7 +53,7 @@ public class JobApplicationGUI extends JFrame {
     public JobApplicationGUI() {
         setTitle("Job Application");
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        setSize(600, 400);
+        setSize(1400, 700);
         setLayout(new GridLayout(1, 2));
 
         inputPanel = new JPanel();
@@ -109,6 +110,8 @@ public class JobApplicationGUI extends JFrame {
         introAddButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+                removeIntroScreen();
+                setupAddScreen();
                 //Add the actions for this button GK
             }
         });
@@ -133,54 +136,76 @@ public class JobApplicationGUI extends JFrame {
         inputPanel.add(introSearchButton);
 
         getContentPane().add(inputPanel);
+    }
 
+    private void removeIntroScreen() {
+        inputPanel.removeAll();
+        setVisible(true);
     }
 
     private void setupAddScreen() {
         inputPanel.setLayout(new GridLayout(8, 2));
         inputPanel.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
 
+        GridBagConstraints constraints = new GridBagConstraints();
+        constraints.gridx = 0;
+        constraints.gridy = 0;
+    
         // Company Name
         companyNameLabel = new JLabel("Company Name:");
-        inputPanel.add(companyNameLabel);
+        inputPanel.add(companyNameLabel, constraints);
         companyNameField = new JTextField();
-        inputPanel.add(companyNameField);
+        inputPanel.add(companyNameField, constraints);
+
+        constraints.gridy++;
 
         // Job Name
         jobNameLabel = new JLabel("Job Name:");
-        inputPanel.add(jobNameLabel);
+        inputPanel.add(jobNameLabel, constraints);
         jobNameField = new JTextField();
-        inputPanel.add(jobNameField);
+        inputPanel.add(jobNameField, constraints);
+
+        constraints.gridy++;
 
         // Salary
         salaryLabel = new JLabel("Salary:");
-        inputPanel.add(salaryLabel);
+        inputPanel.add(salaryLabel, constraints);
         salaryField = new JTextField();
-        inputPanel.add(salaryField);
+        inputPanel.add(salaryField, constraints);
+
+        constraints.gridy++;
 
         // Application Date
         applicationDateLabel = new JLabel("Application Date:");
-        inputPanel.add(applicationDateLabel);
+        inputPanel.add(applicationDateLabel, constraints);
         applicationDateField = new JTextField();
-        inputPanel.add(applicationDateField);
+        inputPanel.add(applicationDateField, constraints);
+
+        constraints.gridy++;
 
         // Start Date
         startDateLabel = new JLabel("Start Date:");
-        inputPanel.add(startDateLabel);
+        inputPanel.add(startDateLabel, constraints);
         startDateField = new JTextField();
-        inputPanel.add(startDateField);
+        inputPanel.add(startDateField, constraints);
+
+        constraints.gridy++;
 
         // Website Used
         websiteLabel = new JLabel("Website Used:");
-        inputPanel.add(websiteLabel);
+        inputPanel.add(websiteLabel, constraints);
         websiteField = new JTextField();
-        inputPanel.add(websiteField);
+        inputPanel.add(websiteField, constraints);
+
+        constraints.gridy++;
 
         // Link to Application
         applicationDateLabel = new JLabel("Application Date:");
-        inputPanel.add(applicationDateLabel);
+        inputPanel.add(applicationDateLabel, constraints);
         applicationLinkField = new JTextField();
-        inputPanel.add(applicationLinkField);
+        inputPanel.add(applicationLinkField, constraints);
+
+        constraints.gridy++;
 
         // Save Button
         JButton saveButton = new JButton("Save");
@@ -191,9 +216,13 @@ public class JobApplicationGUI extends JFrame {
                 displayJobArray();
             }
         });
-        inputPanel.add(saveButton);
+        inputPanel.add(saveButton, constraints);
 
         getContentPane().add(inputPanel);
+        setVisible(true);
+    }
+
+    private void removeAddScreen() {
 
     }
 
@@ -201,7 +230,15 @@ public class JobApplicationGUI extends JFrame {
         
     }
 
+    private void removeEditDeleteScreen() {
+
+    }
+
     private void setupSearchScreen() {
+
+    }
+
+    private void removeSearchScreen() {
 
     }
 
