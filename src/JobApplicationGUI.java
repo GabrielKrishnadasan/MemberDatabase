@@ -58,14 +58,14 @@ public class JobApplicationGUI extends JFrame {
 
         inputPanel = new JPanel();
 
-        setupIntroScreen();
-
         // Display Area
         displayArea = new JTextArea();
         displayArea.setEditable(false);
         displayArea.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
         getContentPane().add(new JScrollPane(displayArea));
 
+        setupIntroScreen();
+        
         //Initializes variables for readin of the file
         String companyName;
         String jobName;
@@ -136,6 +136,7 @@ public class JobApplicationGUI extends JFrame {
         inputPanel.add(introSearchButton);
 
         getContentPane().add(inputPanel);
+        setVisible(true);
     }
 
     private void removeIntroScreen() {
@@ -218,12 +219,24 @@ public class JobApplicationGUI extends JFrame {
         });
         inputPanel.add(saveButton, constraints);
 
+        JButton backButton = new JButton("Back");
+        backButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                removeAddScreen();
+                setupIntroScreen();
+            }
+        });
+
+        inputPanel.add(backButton, constraints);
+
         getContentPane().add(inputPanel);
         setVisible(true);
     }
 
     private void removeAddScreen() {
-
+        inputPanel.removeAll();
+        setVisible(true);
     }
 
     private void setupEditDeleteScreen() {
