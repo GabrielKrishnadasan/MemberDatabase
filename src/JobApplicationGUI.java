@@ -53,7 +53,7 @@ public class JobApplicationGUI extends JFrame {
     public JobApplicationGUI() {
         setTitle("Job Application");
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        setSize(1400, 700);
+        setSize(1000, 600);
         setLayout(new GridLayout(1, 2));
 
         inputPanel = new JPanel();
