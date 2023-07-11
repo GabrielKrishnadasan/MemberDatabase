@@ -1,13 +1,12 @@
 package src;
 
 import javax.swing.*;
+import javax.swing.text.*;
 
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
+import java.awt.event.*;
 
 import java.util.ArrayList;
-import java.util.concurrent.CopyOnWriteArrayList;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
@@ -39,7 +38,7 @@ public class JobApplicationGUI extends JFrame {
     private JTextField websiteField;
     private JTextField applicationLinkField;
 
-    private JTextArea displayArea;
+    private JTextPane displayArea;
 
     private JLabel companyNameLabel;
     private JLabel jobNameLabel;
@@ -59,7 +58,7 @@ public class JobApplicationGUI extends JFrame {
         inputPanel = new JPanel();
 
         // Display Area
-        displayArea = new JTextArea();
+        displayArea = new JTextPane();
         displayArea.setEditable(false);
         displayArea.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
         getContentPane().add(new JScrollPane(displayArea));
@@ -122,6 +121,8 @@ public class JobApplicationGUI extends JFrame {
             @Override
             public void actionPerformed(ActionEvent e) {
                 //Add the actions for this button GK
+                removeIntroScreen();
+                setupEditDeleteScreen();
             }
         });
         inputPanel.add(introEditDeleteButton);
@@ -240,11 +241,105 @@ public class JobApplicationGUI extends JFrame {
     }
 
     private void setupEditDeleteScreen() {
-        
+        //displayArea.setText("");
+
+        inputPanel.setLayout(new GridLayout(9, 3));
+        inputPanel.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
+
+        GridBagConstraints constraints = new GridBagConstraints();
+        constraints.gridx = 0;
+        constraints.gridy = 0;
+    
+        // Company Name
+        companyNameLabel = new JLabel("Company Name:");
+        inputPanel.add(companyNameLabel, constraints);
+        companyNameField = new JTextField();
+        inputPanel.add(companyNameField, constraints);
+
+        constraints.gridy++;
+
+        // Job Name
+        jobNameLabel = new JLabel("Job Name:");
+        inputPanel.add(jobNameLabel, constraints);
+        jobNameField = new JTextField();
+        inputPanel.add(jobNameField, constraints);
+
+        constraints.gridy++;
+
+        // Salary
+        salaryLabel = new JLabel("Salary:");
+        inputPanel.add(salaryLabel, constraints);
+        salaryField = new JTextField();
+        inputPanel.add(salaryField, constraints);
+
+        constraints.gridy++;
+
+        // Application Date
+        applicationDateLabel = new JLabel("Application Date:");
+        inputPanel.add(applicationDateLabel, constraints);
+        applicationDateField = new JTextField();
+        inputPanel.add(applicationDateField, constraints);
+
+        constraints.gridy++;
+
+        // Start Date
+        startDateLabel = new JLabel("Start Date:");
+        inputPanel.add(startDateLabel, constraints);
+        startDateField = new JTextField();
+        inputPanel.add(startDateField, constraints);
+
+        constraints.gridy++;
+
+        // Website Used
+        websiteLabel = new JLabel("Website Used:");
+        inputPanel.add(websiteLabel, constraints);
+        websiteField = new JTextField();
+        inputPanel.add(websiteField, constraints);
+
+        constraints.gridy++;
+
+        // Link to Application
+        applicationDateLabel = new JLabel("Application Date:");
+        inputPanel.add(applicationDateLabel, constraints);
+        applicationLinkField = new JTextField();
+        inputPanel.add(applicationLinkField, constraints);
+
+        constraints.gridy++;
+
+        // Save Button
+        JButton editButton = new JButton("Edit");
+        editButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+            }
+        });
+        inputPanel.add(editButton, constraints);
+
+        JButton deleteButton = new JButton("Delete");
+        deleteButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+            }
+        });
+        inputPanel.add(deleteButton, constraints);
+
+        JButton backButton = new JButton("Back");
+        backButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                removeEditDeleteScreen();
+                setupIntroScreen();
+            }
+        });
+        inputPanel.add(backButton, constraints);
+
+        getContentPane().add(inputPanel);
+        setVisible(true);
     }
 
     private void removeEditDeleteScreen() {
-
+        inputPanel.removeAll();
+        setVisible(true);
     }
 
     private void setupSearchScreen() {
@@ -309,6 +404,33 @@ public class JobApplicationGUI extends JFrame {
 
         } else {
             JOptionPane.showMessageDialog(this, "Please fill in all the fields.", "Error", JOptionPane.ERROR_MESSAGE);
+        }
+    }
+
+    private static void insertClickableText(JTextPane textPane, String text, Runnable onClick) {
+        StyledDocument doc = textPane.getStyledDocument();
+        SimpleAttributeSet attrSet = new SimpleAttributeSet();
+        StyleConstants.setUnderline(attrSet, true);
+        StyleConstants.setForeground(attrSet, Color.BLUE);
+
+        try {
+            doc.insertString(doc.getLength(), text, attrSet);
+
+            // Create a custom mouse listener to handle the click event
+            textPane.addMouseListener(new MouseAdapter() {
+                @Override
+                public void mouseClicked(MouseEvent e) {
+                    int offset = textPane.viewToModel2D(e.getPoint());
+                    Element element = doc.getCharacterElement(offset);
+                    AttributeSet attribs = element.getAttributes();
+
+                    if (StyleConstants.isUnderline(attribs) && e.getButton() == MouseEvent.BUTTON1) {
+                        onClick.run();
+                    }
+                }
+            });
+        } catch (BadLocationException e) {
+            e.printStackTrace();
         }
     }
 
